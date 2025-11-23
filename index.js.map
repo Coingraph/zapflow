@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "sources": ["../src/index.ts", "../src/character.ts"],
+  "sourcesContent": [
+    "import { logger, type IAgentRuntime, type Project, type ProjectAgent } from '@elizaos/core';\nimport starterPlugin from './plugin.ts';\nimport { character } from './character.ts';\n\nconst initCharacter = ({ runtime }: { runtime: IAgentRuntime }) => {\n  logger.info('Initializing character');\n  logger.info({ name: character.name }, 'Name:');\n};\n\nexport const projectAgent: ProjectAgent = {\n  character,\n  init: async (runtime: IAgentRuntime) => await initCharacter({ runtime }),\n  // plugins: [starterPlugin], <-- Import custom plugins here\n};\n\nconst project: Project = {\n  agents: [projectAgent],\n};\n\nexport { character } from './character.ts';\n\nexport default project;\n",
+    "import { type Character } from \"@elizaos/core\";\n\nexport const character: Character = {\n  name: \"ZapFlow\",\n  username: \"zapflow\",\n  bio: \"Fast AI agent on Storacha - permanent memory since 2025\",\n  lore: [\n    \"Connected to space: my-ai-agent-memory\",\n    \"All old files are available and ready\"\n  ],\n  plugins: [\n    \"@storacha/elizaos-plugin\",\n    \"@elizaos/plugin-sql\",\n    ...(process.env.OPENROUTER_API_KEY?.trim() ? [\"@elizaos/plugin-openrouter\"] : []),\n    ...(process.env.OLLAMA_API_ENDPOINT?.trim() ? [\"@elizaos/plugin-ollama\"] : []),\n  ],\n  systemPrompt: `Your name is ZapFlow.\nYou are a fast, helpful AI agent.\nAll user files from 2025 are stored and ready for upload/retrieval.\nBe polite, fast, and very useful.`\n};\n\nexport default character;\n"
+  ],
+  "mappings": ";AAAA;;;ACEO,IAAM,YAAuB;AAAA,EAClC,MAAM;AAAA,EACN,UAAU;AAAA,EACV,KAAK;AAAA,EACL,MAAM;AAAA,IACJ;AAAA,IACA;AAAA,EACF;AAAA,EACA,SAAS;AAAA,IACP;AAAA,IACA;AAAA,IACA,GAAI,QAAQ,IAAI,oBAAoB,KAAK,IAAI,CAAC,4BAA4B,IAAI,CAAC;AAAA,IAC/E,GAAI,QAAQ,IAAI,qBAAqB,KAAK,IAAI,CAAC,wBAAwB,IAAI,CAAC;AAAA,EAC9E;AAAA,EACA,cAAc;AAAA;AAAA;AAAA;AAIhB;;;ADhBA,IAAM,gBAAgB,GAAG,cAA0C;AAAA,EACjE,OAAO,KAAK,wBAAwB;AAAA,EACpC,OAAO,KAAK,EAAE,MAAM,UAAU,KAAK,GAAG,OAAO;AAAA;AAGxC,IAAM,eAA6B;AAAA,EACxC;AAAA,EACA,MAAM,OAAO,YAA2B,MAAM,cAAc,EAAE,QAAQ,CAAC;AAEzE;AAEA,IAAM,UAAmB;AAAA,EACvB,QAAQ,CAAC,YAAY;AACvB;AAIA,IAAe;",
+  "debugId": "F56040DDFD8BE9E764756E2164756E21",
+  "names": []
+}
